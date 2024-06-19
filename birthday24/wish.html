@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Baby</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(pic/bg2.jpeg) ;
+            font-family: 'Arial', sans-serif;
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size:cover;
+        }
+        .round-frame {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .round-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding-bottom: 10px;
+        }
+        .secret-form {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        .secret-form input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            transition: border-color 0.3s;
+        }
+        .secret-form input:focus {
+            border-color: #66afe9;
+            outline: none;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+        .secret-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .secret-form button:hover {
+            background-color: #45a049;
+        }
+        .envelope {
+            font-size: 100px;
+            cursor: pointer;
+            animation: heartbeat 1.5s infinite;
+            display: none;
+        }
+        @keyframes heartbeat {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transform: scale(1);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: scale(1.2);
+            }
+        }
+        .letter {
+            width: 450px;
+            height: 250px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transform-origin: bottom;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.6s;
+            overflow-y: auto;
+            padding: 20px;
+            color: #333;
+        }
+        .letter.visible {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .wishes {
+            font-size: 16px;
+        }
+        .love-img {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+        }
+        .bottom-emojis {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .cake-emoji {
+            font-size: 50px;
+            cursor: pointer;
+        }
+        .message {
+            display: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="round-frame" id="roundFrame">
+        <img src="pic/pic20.jpg" alt="Cute Picture">
+    </div>
+    <div class="welcome-message" id="welcomeMessage" style="display: none;"><b>WELCOME MY BABY !</b></div>
+    <div class="secret-form" id="secretForm">
+
+
+<input type="text" id="secretPhrase" placeholder="Enter secret phrase">
+        <input type="password" id="password" placeholder="Enter password">
+        <button id="submitBtn">Submit</button>
+    </div>
+    <div class="envelope" id="envelope">💌</div>
+    <div class="letter" id="letter">
+        <img src="pic/pic20.jpg" alt="Love Picture" class="love-img">
+        <div class="wishes">
+           <br> Dear Sayang,<br><br>
+            Wishing you a day filled with love ❤️, joy, and all your favorite things. May your year ahead be as wonderful and bright as you are. Happy Birthday! 🎂❤️<br><br>
+            At the same time, I pray that you always success in your daily life and blessed with sustenance. Wishing you all the best for your hard work this time. Keep fighting the best you could for you daily life.❤️✊
+            All the best for you in the future !💗💗💗<br><br>
+            A lot of love,<br>
+            <i>Ayang Cuk ❤️</i>
+        </div>
+        <div class="bottom-emojis" id="bottomEmojis">
+            ❤️
+            <span class="cake-emoji">🎂</span>
+        </div>
+        <div class="message" id="message">Happy Sweet 22 years old sayang ❤️<br>
+        Loveyou Baby ❤️<br></div>
+    </div>
+    <audio id="birthdayAudio" src="https://example.com/happy_birthday.mp3"></audio>
+
+    <script>
+        const correctSecretPhrase = "yasminsayang";
+        const correctPassword = "sayang20june2002";
+
+        // Function to show the secret form
+        function showSecretForm() {
+            const secretForm = document.getElementById('secretForm');
+            secretForm.style.display = 'flex';
+            const roundFrame = document.getElementById('roundFrame');
+            roundFrame.style.cursor = 'default';
+            roundFrame.onclick = null; // Disable further clicks
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            welcomeMessage.style.display = 'block';
+        }
+
+        // Function to validate the secret phrase and password
+        function validateSecret() {
+            const secretPhrase = document.getElementById('secretPhrase').value;
+            const password = document.getElementById('password').value;
+
+            if (secretPhrase === correctSecretPhrase && password === correctPassword) {
+                const secretForm = document.getElementById('secretForm');
+                secretForm.style.display = 'none';
+                const envelope = document.getElementById('envelope');
+                envelope.style.display = 'block';
+                const roundFrame = document.getElementById('roundFrame');
+                roundFrame.style.display = 'none'; // Hide the round frame
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                welcomeMessage.style.display = 'none'; // Hide the welcome message
+            } else {
+                alert('Incorrect secret phrase or password. Please try again.');
+            }
+        }
+
+        // Event listener for round frame click
+        document.getElementById('roundFrame').addEventListener('click', showSecretForm);
+
+        // Event listener for submit button click
+        document.getElementById('submitBtn').addEventListener('click', validateSecret);
+
+        // Event listener for Enter key press in password field
+        document.getElementById('password').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                validateSecret();
+            }
+        });
+
+        // Function to open the birthday letter
+        function openLetter() {
+            const letter = document.getElementById('letter');
+            letter.classList.add('visible');
+            const envelope = document.querySelector('.envelope');
+            envelope.style.display = 'none';
+            
+            const audio = document.getElementById('birthdayAudio');
+            audio.play();
+        }
+
+        // Event listener for opening the letter
+        document.getElementById('envelope').addEventListener('click', openLetter);
+
+        // Event listener for clicking on the cake emoji
+        document.querySelector('.cake-emoji').addEventListener('click', function() {
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
